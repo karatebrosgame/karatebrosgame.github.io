@@ -104,19 +104,22 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://karatebros.io" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        {/* Google Analytics - Base code in head for GSC verification */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-              `,
-            }}
-          />
-        )}
+        {/* Google Analytics - Full code in head for GSC verification */}
+        {/* GA ID: G-ZX2YGFMKBK */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-ZX2YGFMKBK"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-ZX2YGFMKBK');
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col bg-black text-slate-50 font-sans selection:bg-red-500 selection:text-white`}>
         <GoogleAnalytics />
