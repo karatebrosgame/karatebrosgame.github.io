@@ -21,9 +21,13 @@ A Next.js-based SEO-friendly website for playing Karate Bros online.
 
 2. (Optional) Set environment variables in `.env.local`:
    ```env
-   NEXT_PUBLIC_SITE_URL=https://karatebros.github.io
+   NEXT_PUBLIC_SITE_URL=https://karatebrosgame.github.io
    GEMINI_API_KEY=your-api-key-here
+   GOOGLE_SITE_VERIFICATION=your-google-verification-code
+   NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
    ```
+   
+   See [GOOGLE_SEARCH_CONSOLE.md](./GOOGLE_SEARCH_CONSOLE.md) for Google Search Console and Google Analytics setup.
 
 3. Run the development server:
    ```bash

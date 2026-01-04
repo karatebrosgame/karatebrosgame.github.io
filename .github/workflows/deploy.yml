@@ -36,6 +36,8 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://karatebrosgame.github.io
+          GOOGLE_SITE_VERIFICATION: ${{ secrets.GOOGLE_SITE_VERIFICATION }}
+          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
 
       - name: Create .nojekyll file
         run: touch ./out/.nojekyll

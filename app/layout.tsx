@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Bangers, Press_Start_2P } from 'next/font/google'
 import './globals.css'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 
 // Optimize fonts with Next.js Font Optimization
 const inter = Inter({ 
@@ -79,8 +80,10 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Add your verification codes here if needed
-    // google: 'your-google-verification-code',
+    // Google Search Console verification
+    // Get your verification code from: https://search.google.com/search-console
+    // Add it to .env.local as: GOOGLE_SITE_VERIFICATION=your-verification-code
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
     // yandex: 'your-yandex-verification-code',
   },
 }
@@ -97,10 +100,26 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.youtube.com" />
         <link rel="preconnect" href="https://www.youtube.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://karatebros.io" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://karatebros.io" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        {/* Google Analytics - Base code in head for GSC verification */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+              `,
+            }}
+          />
+        )}
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col bg-black text-slate-50 font-sans selection:bg-red-500 selection:text-white`}>
+        <GoogleAnalytics />
         {children}
       </body>
     </html>
