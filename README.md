@@ -66,11 +66,60 @@ npm start
 └── script/           # SEO audit scripts (unchanged)
 ```
 
-## Deployment
+## Deployment to GitHub Pages
 
-This project can be deployed to:
-- Vercel (recommended for Next.js)
-- GitHub Pages (with static export)
-- Any Node.js hosting platform
+This project is configured for automatic deployment to GitHub Pages at `https://karatebros.github.io`.
 
-For GitHub Pages, you may need to configure `next.config.js` with `output: 'export'` for static export.
+### Automatic Deployment (Recommended)
+
+The project includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically builds and deploys your site when you push to the `master` or `main` branch.
+
+**Setup Steps:**
+
+1. **Enable GitHub Pages:**
+   - Go to your repository settings on GitHub
+   - Navigate to "Pages" in the left sidebar
+   - Under "Source", select "GitHub Actions"
+   - Save the settings
+
+2. **Push your code:**
+   ```bash
+   git push -u origin master
+   ```
+
+3. **Monitor deployment:**
+   - Go to the "Actions" tab in your GitHub repository
+   - Watch the workflow run and deploy your site
+   - Once complete, your site will be available at `https://karatebros.github.io`
+
+### Manual Deployment
+
+If you prefer to deploy manually:
+
+1. **Build the static site:**
+   ```bash
+   npm run build
+   ```
+
+2. **The static files will be in the `out/` directory**
+
+3. **Push the `out/` directory to the `gh-pages` branch:**
+   ```bash
+   git subtree push --prefix out origin gh-pages
+   ```
+
+### Other Deployment Options
+
+- **Vercel** (recommended for Next.js with full features)
+- **Netlify**
+- **Any static hosting service**
+
+## Configuration
+
+The site URL is configured in:
+- `next.config.js` - Base path and export settings
+- `app/layout.tsx` - Metadata base URL
+- `app/sitemap.ts` - Sitemap base URL
+- `app/robots.ts` - Robots.txt base URL
+
+All use the environment variable `NEXT_PUBLIC_SITE_URL` (defaults to `https://karatebros.github.io`).
