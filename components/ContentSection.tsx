@@ -33,21 +33,6 @@ const ContentSection: React.FC = () => {
             The Comprehensive Guide to <span className="text-red-600">Karate Bros</span>
           </h1>
 
-          {/* Game Images Gallery */}
-          <div className="mb-12 grid grid-cols-2 md:grid-cols-3 gap-4">
-            {gameImages.map((image, index) => (
-              <div key={index} className="relative aspect-video bg-black border-2 border-white/10 overflow-hidden group">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover transition-transform group-hover:scale-110"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 300px"
-                />
-              </div>
-            ))}
-          </div>
-
           {/* Intro Block */}
           <div className="mb-12 text-lg text-gray-200">
             <p className="mb-6">
@@ -68,6 +53,17 @@ const ContentSection: React.FC = () => {
               <strong>Karate Bros</strong> is not just another fighting game; it is a tribute to the golden age of beat-'em-ups, reimagined for the modern web. Developed with a focus on accessibility and depth, the <strong>Karate Bros game</strong> allows players to jump instantly into action without the need for massive downloads or expensive consoles.
             </p>
 
+            {/* Image 1: karate-bros-github.png */}
+            <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
+              <Image
+                src={gameImages[2].src}
+                alt={gameImages[2].alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            </div>
+
             <h3 className="text-2xl font-bold text-white mt-8 mb-4">The Core Philosophy</h3>
             <p className="mb-4">
               At its heart, <strong>Karate Bros official</strong> gameplay is built on the "easy to learn, hard to master" philosophy. The controls are simple enough for anyone to mash buttons and have fun, but the underlying engine features hitboxes, frame advantages, and stamina management that rival top-tier esports titles. This duality is what makes <strong>Karate Bros online</strong> so addictive. You can play a casual match with a friend on a shared keyboard, or dive into the <strong>Karate Bros io</strong> ranked mode to test your skills against the world.
@@ -86,6 +82,17 @@ const ContentSection: React.FC = () => {
             <p className="mb-6">
               Understanding the controls is the first step to dominance. The <strong>Karate Bros game</strong> features a dual-control scheme optimized for two players on a single keyboard, but it also supports gamepads for those playing the <strong>Karate Bros official</strong> desktop version.
             </p>
+
+            {/* Image 2: karate-bros-game.png */}
+            <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
+              <Image
+                src={gameImages[1].src}
+                alt={gameImages[1].alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            </div>
 
             <div className="grid md:grid-cols-2 gap-8 my-8">
               <div className="border border-white/20 p-6 bg-white/5">
@@ -138,6 +145,17 @@ const ContentSection: React.FC = () => {
               The roster is the soul of any fighting game. <strong>Karate Bros official</strong> features a diverse cast, often referred to by the community simply as "The Bros". Let's break down the meta.
             </p>
 
+            {/* Image 3: karate-bros-io.png */}
+            <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
+              <Image
+                src={gameImages[3].src}
+                alt={gameImages[3].alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            </div>
+
             <div className="space-y-8">
               <div className="border-l-2 border-red-600 pl-6">
                 <h3 className="text-xl font-bold text-white mb-2">The Karate Kid (Ryu-Style)</h3>
@@ -168,6 +186,17 @@ const ContentSection: React.FC = () => {
             <p className="mb-4">
               One of the biggest hurdles for gamers is access. Schools and workplaces often block gaming sites. This is where our <strong>Karate Bros unblocked</strong> solution shines. We utilize advanced mirroring technology and lightweight HTML5 wrappers to ensure the game remains accessible even behind strict firewalls.
             </p>
+
+            {/* Image 4: karate-bros-online.png */}
+            <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
+              <Image
+                src={gameImages[4].src}
+                alt={gameImages[4].alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            </div>
             
             <h3 className="text-xl font-bold text-white mt-6 mb-3">Why is it blocked elsewhere?</h3>
             <p className="mb-4">
@@ -194,6 +223,17 @@ const ContentSection: React.FC = () => {
             <p className="mb-6">
               So, you've learned the buttons. Now, how do you actually crush your opponents in <strong>Karate Bros io</strong>? Here is the blueprint to victory.
             </p>
+
+            {/* Image 5: karate-bros-free.png */}
+            <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
+              <Image
+                src={gameImages[0].src}
+                alt={gameImages[0].alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 800px"
+              />
+            </div>
 
             <h3 className="text-xl font-bold text-white mt-6 mb-3">Phase 1: Neutral Game</h3>
             <p className="mb-4">
