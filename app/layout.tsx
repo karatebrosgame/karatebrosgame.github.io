@@ -1,5 +1,28 @@
 import type { Metadata } from 'next'
+import { Inter, Bangers, Press_Start_2P } from 'next/font/google'
 import './globals.css'
+
+// Optimize fonts with Next.js Font Optimization
+const inter = Inter({ 
+  subsets: ['latin'], 
+  weight: ['400', '600', '800'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+const bangers = Bangers({ 
+  subsets: ['latin'], 
+  weight: ['400'],
+  display: 'swap',
+  variable: '--font-bangers',
+})
+
+const pressStart2P = Press_Start_2P({ 
+  subsets: ['latin'], 
+  weight: ['400'],
+  display: 'swap',
+  variable: '--font-press-start-2p',
+})
 
 export const metadata: Metadata = {
   title: 'Karate Bros - Play Karate Bros IO Game Online Free | Unblocked',
@@ -68,7 +91,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${bangers.variable} ${pressStart2P.variable}`}>
       <head>
         {/* Preconnect to external domains for faster loading */}
         <link rel="preconnect" href="https://www.youtube.com" />
@@ -77,7 +100,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://karatebros.io" />
       </head>
-      <body className="min-h-screen flex flex-col bg-black text-slate-50 font-sans selection:bg-red-500 selection:text-white">
+      <body className={`${inter.className} min-h-screen flex flex-col bg-black text-slate-50 font-sans selection:bg-red-500 selection:text-white`}>
         {children}
       </body>
     </html>

@@ -8,9 +8,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Bangers', 'cursive'],
-        pixel: ['"Press Start 2P"', 'cursive'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        display: ['var(--font-bangers)', 'cursive'],
+        pixel: ['var(--font-press-start-2p)', 'cursive'],
       },
       colors: {
         brand: {

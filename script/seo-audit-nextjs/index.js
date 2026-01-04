@@ -19,7 +19,8 @@ class NextJSSEOAuditor {
             ogImage: { status: 'pass', issues: [] },
             favicon: { status: 'pass', issues: [] },
             images: { status: 'pass', issues: [] },
-            videos: { status: 'pass', issues: [] }
+            videos: { status: 'pass', issues: [] },
+            fonts: { status: 'pass', issues: [] }
         };
     }
 
@@ -36,6 +37,7 @@ class NextJSSEOAuditor {
         await this.checkFavicon();
         await this.checkImages();
         await this.checkVideos();
+        await this.checkFonts();
 
         this.generateReport();
     }
@@ -303,6 +305,45 @@ class NextJSSEOAuditor {
         }
     }
 
+    async checkFonts() {
+        console.log('\n🔤 Checking Font Localization...');
+        const layoutPath = path.join(this.basePath, 'app', 'layout.tsx');
+        const globalsCssPath = path.join(this.basePath, 'app', 'globals.css');
+        
+        let hasNextFont = false;
+        let hasExternalFonts = false;
+        let hasGoogleFontsImport = false;
+
+        // Check layout.tsx for Next.js Font Optimization
+        if (await fs.pathExists(layoutPath)) {
+            const layoutContent = await fs.readFile(layoutPath, 'utf-8');
+            hasNextFont = /from ['"]next\/font\/google['"]/i.test(layoutContent) || 
+                         /next\/font/i.test(layoutContent);
+        }
+
+        // Check globals.css for external font imports
+        if (await fs.pathExists(globalsCssPath)) {
+            const cssContent = await fs.readFile(globalsCssPath, 'utf-8');
+            hasGoogleFontsImport = /fonts\.googleapis\.com/i.test(cssContent) ||
+                                  /@import.*fonts/i.test(cssContent);
+            hasExternalFonts = /@import\s+url\(['"]?https?:/i.test(cssContent);
+        }
+
+        if (hasNextFont && !hasGoogleFontsImport) {
+            console.log('  ✅ Using Next.js Font Optimization (fonts are localized)');
+        } else if (hasNextFont && hasGoogleFontsImport) {
+            this.results.fonts.status = 'warning';
+            this.results.fonts.issues.push('Using Next.js Font Optimization but also has external font imports in CSS');
+            console.log('  ⚠️  Mixed font loading (Next.js Font + external imports)');
+        } else if (hasGoogleFontsImport || hasExternalFonts) {
+            this.results.fonts.status = 'warning';
+            this.results.fonts.issues.push('Using external font imports (fonts.googleapis.com). Consider using Next.js Font Optimization for better performance.');
+            console.log('  ⚠️  External font imports detected (not localized)');
+        } else {
+            console.log('  ℹ️  No font configuration found');
+        }
+    }
+
     generateReport() {
         console.log('\n' + '='.repeat(60));
         console.log('📊 SEO Audit Summary\n');
@@ -317,7 +358,8 @@ class NextJSSEOAuditor {
             { name: 'OG Image', result: this.results.ogImage },
             { name: 'Favicon', result: this.results.favicon },
             { name: 'Image Optimization', result: this.results.images },
-            { name: 'Video Optimization', result: this.results.videos }
+            { name: 'Video Optimization', result: this.results.videos },
+            { name: 'Font Localization', result: this.results.fonts }
         ];
 
         let passCount = 0;
