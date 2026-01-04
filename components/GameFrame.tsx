@@ -153,7 +153,10 @@ const GameFrame: React.FC = () => {
           <div className="w-full max-w-5xl mt-2 flex justify-between text-[10px] md:text-xs text-gray-600 font-pixel uppercase">
             <span>Server: US-East-1</span>
             <span>Version: v2.4.0</span>
-            <span className="text-green-600">Status: ONLINE</span>
+            <span className="flex items-center gap-1">
+              <span className="inline-block w-2 h-2 rounded-full bg-green-600 animate-pulse" aria-label="Online"></span>
+              <span className="text-green-600">Status: ONLINE</span>
+            </span>
           </div>
         </div>
       </div>

@@ -17,13 +17,13 @@ const ContentSection: React.FC = () => {
         {/* Navigation / TOC */}
         <div className="border-y border-white/10 py-6 mb-12">
           <h3 className="font-pixel text-xs text-gray-500 mb-4 uppercase tracking-widest">Quick Navigation</h3>
-          <div className="flex flex-wrap gap-4 text-sm font-bold text-red-500">
-            <a href="#about" className="hover:text-white hover:underline">About the Game</a>
-            <a href="#mechanics" className="hover:text-white hover:underline">Game Mechanics</a>
-            <a href="#characters" className="hover:text-white hover:underline">Character Guide</a>
-            <a href="#unblocked" className="hover:text-white hover:underline">Unblocked Access</a>
-            <a href="#strategy" className="hover:text-white hover:underline">Pro Strategy</a>
-            <a href="#faq" className="hover:text-white hover:underline">FAQ</a>
+          <div className="flex flex-wrap gap-4 text-sm font-bold">
+            <a href="#about" className="text-red-500 hover:text-white hover:underline underline decoration-red-500/50">About the Game</a>
+            <a href="#mechanics" className="text-red-500 hover:text-white hover:underline underline decoration-red-500/50">Game Mechanics</a>
+            <a href="#characters" className="text-red-500 hover:text-white hover:underline underline decoration-red-500/50">Character Guide</a>
+            <a href="#unblocked" className="text-red-500 hover:text-white hover:underline underline decoration-red-500/50">Unblocked Access</a>
+            <a href="#strategy" className="text-red-500 hover:text-white hover:underline underline decoration-red-500/50">Pro Strategy</a>
+            <a href="#faq" className="text-red-500 hover:text-white hover:underline underline decoration-red-500/50">FAQ</a>
           </div>
         </div>
 
@@ -47,7 +47,7 @@ const ContentSection: React.FC = () => {
 
           {/* SECTION 1: THE PHENOMENON */}
           <section id="about" className="mb-16">
-            <h2 className="text-3xl font-display text-white mb-6 text-red-600">1. What is Karate Bros?</h2>
+            <h2 className="text-3xl font-display text-white mb-6 text-red-600 tracking-normal">1. What is Karate Bros?</h2>
             
             <p className="mb-4">
               <strong>Karate Bros</strong> is not just another fighting game; it is a tribute to the golden age of beat-'em-ups, reimagined for the modern web. Developed with a focus on accessibility and depth, the <strong>Karate Bros game</strong> allows players to jump instantly into action without the need for massive downloads or expensive consoles.
@@ -77,11 +77,27 @@ const ContentSection: React.FC = () => {
 
           {/* SECTION 2: HOW TO PLAY */}
           <section id="mechanics" className="mb-16">
-            <h2 className="text-3xl font-display text-white mb-6 text-red-600">2. How to Play Karate Bros</h2>
+            <h2 className="text-3xl font-display text-white mb-6 text-red-600 tracking-normal">2. How to Play Karate Bros</h2>
             
             <p className="mb-6">
               Understanding the controls is the first step to dominance. The <strong>Karate Bros game</strong> features a dual-control scheme optimized for two players on a single keyboard, but it also supports gamepads for those playing the <strong>Karate Bros official</strong> desktop version.
             </p>
+
+            {/* YouTube Video */}
+            <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/Aknkeqa86BI"
+                title="retrobowl26 org Karate Bros - RETRO FIGHTER IS BACK!"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+                loading="lazy"
+                className="w-full h-full"
+              />
+            </div>
 
             {/* Image 2: karate-bros-game.png */}
             <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
@@ -95,8 +111,11 @@ const ContentSection: React.FC = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 my-8">
-              <div className="border border-white/20 p-6 bg-white/5">
-                <h4 className="font-pixel text-red-500 mb-4">PLAYER 1 CONTROLS</h4>
+              <div className="border-l-4 border-red-500 border border-white/20 p-6 bg-white/5">
+                <h4 className="font-pixel text-red-500 mb-4 flex items-center gap-2">
+                  <span className="inline-block w-3 h-3 rounded-full bg-red-500"></span>
+                  PLAYER 1 CONTROLS
+                </h4>
                 <ul className="space-y-2 font-mono text-sm">
                   <li className="flex justify-between"><span>W</span> <span className="text-gray-500">JUMP</span></li>
                   <li className="flex justify-between"><span>A</span> <span className="text-gray-500">MOVE LEFT</span></li>
@@ -109,8 +128,11 @@ const ContentSection: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="border border-white/20 p-6 bg-white/5">
-                <h4 className="font-pixel text-blue-500 mb-4">PLAYER 2 CONTROLS</h4>
+              <div className="border-l-4 border-blue-500 border border-white/20 p-6 bg-white/5">
+                <h4 className="font-pixel text-blue-500 mb-4 flex items-center gap-2">
+                  <span className="inline-block w-3 h-3 rounded-full bg-blue-500"></span>
+                  PLAYER 2 CONTROLS
+                </h4>
                 <ul className="space-y-2 font-mono text-sm">
                   <li className="flex justify-between"><span>UP ARROW</span> <span className="text-gray-500">JUMP</span></li>
                   <li className="flex justify-between"><span>LEFT ARROW</span> <span className="text-gray-500">MOVE LEFT</span></li>
@@ -140,7 +162,7 @@ const ContentSection: React.FC = () => {
 
           {/* SECTION 3: CHARACTERS */}
           <section id="characters" className="mb-16">
-            <h2 className="text-3xl font-display text-white mb-6 text-red-600">3. Character Roster & Guide</h2>
+            <h2 className="text-3xl font-display text-white mb-6 text-red-600 tracking-normal">3. Character Roster & Guide</h2>
             <p className="mb-6">
               The roster is the soul of any fighting game. <strong>Karate Bros official</strong> features a diverse cast, often referred to by the community simply as "The Bros". Let's break down the meta.
             </p>
@@ -157,22 +179,26 @@ const ContentSection: React.FC = () => {
             </div>
 
             <div className="space-y-8">
-              <div className="border-l-2 border-red-600 pl-6">
+              <div className="border-l-4 border-red-600 pl-6 relative">
+                <div className="absolute left-0 top-0 w-4 h-4 bg-red-600 -translate-x-1/2 rounded-full"></div>
                 <h3 className="text-xl font-bold text-white mb-2">The Karate Kid (Ryu-Style)</h3>
                 <p>The face of the <strong>Karate Bros game</strong>. He utilizes standard projectiles (fireballs) and a rising uppercut. He is the most balanced character and the best starting point for beginners. His stats are evenly distributed across speed, power, and defense.</p>
               </div>
 
-              <div className="border-l-2 border-blue-600 pl-6">
+              <div className="border-l-4 border-blue-600 pl-6 relative">
+                <div className="absolute left-0 top-0 w-4 h-4 bg-blue-600 -translate-x-1/2 rounded"></div>
                 <h3 className="text-xl font-bold text-white mb-2">The Grappler</h3>
                 <p>Slow, hulking, and terrifying up close. If you let The Grappler get within arm's reach, say goodbye to half your health bar. In <strong>Karate Bros online</strong>, lag can sometimes make grappling harder, but on local play, he is a monster. Counter him by keeping your distance with projectiles.</p>
               </div>
 
-              <div className="border-l-2 border-yellow-500 pl-6">
+              <div className="border-l-4 border-yellow-500 pl-6 relative">
+                <div className="absolute left-0 top-0 w-4 h-4 bg-yellow-500 -translate-x-1/2" style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}></div>
                 <h3 className="text-xl font-bold text-white mb-2">Karate Bros Girl (The Speedster)</h3>
                 <p>One of the most searched terms is <strong>Karate Bros girl</strong>, referring to the agile kunoichi character. She has the lowest health in the game but the highest movement speed. Her playstyle revolves around "hit-and-run" tactics. She can jump off walls and throw shurikens, making her a nightmare for slower characters like The Grappler.</p>
               </div>
               
-              <div className="border-l-2 border-green-500 pl-6">
+              <div className="border-l-4 border-green-500 pl-6 relative">
+                <div className="absolute left-0 top-0 w-4 h-4 bg-green-500 -translate-x-1/2" style={{ clipPath: 'polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)' }}></div>
                 <h3 className="text-xl font-bold text-white mb-2">The Boxer</h3>
                 <p>This character cannot kick. Instead, his kick button is a "weave" or "dodge". This makes him unique in the <strong>Karate Bros unblocked</strong> meta. If you time his weaves correctly, he is invincible for a few frames, allowing for devastating counter-punches.</p>
               </div>
@@ -181,7 +207,7 @@ const ContentSection: React.FC = () => {
 
           {/* SECTION 4: UNBLOCKED & ACCESS */}
           <section id="unblocked" className="mb-16">
-            <h2 className="text-3xl font-display text-white mb-6 text-red-600">4. Playing Karate Bros Unblocked</h2>
+            <h2 className="text-3xl font-display text-white mb-6 text-red-600 tracking-normal">4. Playing Karate Bros Unblocked</h2>
             
             <p className="mb-4">
               One of the biggest hurdles for gamers is access. Schools and workplaces often block gaming sites. This is where our <strong>Karate Bros unblocked</strong> solution shines. We utilize advanced mirroring technology and lightweight HTML5 wrappers to ensure the game remains accessible even behind strict firewalls.
@@ -218,7 +244,7 @@ const ContentSection: React.FC = () => {
 
           {/* SECTION 5: STRATEGY GUIDE */}
           <section id="strategy" className="mb-16">
-            <h2 className="text-3xl font-display text-white mb-6 text-red-600">5. How to Win: The Meta</h2>
+            <h2 className="text-3xl font-display text-white mb-6 text-red-600 tracking-normal">5. How to Win: The Meta</h2>
             
             <p className="mb-6">
               So, you've learned the buttons. Now, how do you actually crush your opponents in <strong>Karate Bros io</strong>? Here is the blueprint to victory.
@@ -253,7 +279,7 @@ const ContentSection: React.FC = () => {
 
           {/* SECTION 6: FAQ */}
           <section id="faq" className="mb-16">
-            <h2 className="text-3xl font-display text-white mb-6 text-red-600">6. Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-display text-white mb-6 text-red-600 tracking-normal">6. Frequently Asked Questions</h2>
             
             <div className="space-y-6">
               <div>
