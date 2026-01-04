@@ -1,13 +1,38 @@
-import React from 'react';
+'use client'
+
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 const ContentSection: React.FC = () => {
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const videoRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer for lazy loading YouTube iframe
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !shouldLoadVideo) {
+            setShouldLoadVideo(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' } // Start loading 200px before visible
+    );
+
+    observer.observe(videoRef.current);
+
+    return () => observer.disconnect();
+  }, [shouldLoadVideo]);
   const gameImages = [
-    { src: '/karate-bros-free.png', alt: 'Karate Bros Free Game' },
-    { src: '/karate-bros-game.png', alt: 'Karate Bros Game' },
-    { src: '/karate-bros-github.png', alt: 'Karate Bros GitHub' },
-    { src: '/karate-bros-io.png', alt: 'Karate Bros IO' },
-    { src: '/karate-bros-online.png', alt: 'Karate Bros Online' },
+    { src: '/karate-bros-free.webp', alt: 'Karate Bros Free Game' },
+    { src: '/karate-bros-game.webp', alt: 'Karate Bros Game' },
+    { src: '/karate-bros-github.webp', alt: 'Karate Bros GitHub' },
+    { src: '/karate-bros-io.webp', alt: 'Karate Bros IO' },
+    { src: '/karate-bros-online.webp', alt: 'Karate Bros Online' },
   ];
 
   return (
@@ -16,7 +41,7 @@ const ContentSection: React.FC = () => {
         
         {/* Navigation / TOC */}
         <div className="border-y border-white/10 py-6 mb-12">
-          <h3 className="font-pixel text-xs text-gray-500 mb-4 uppercase tracking-widest">Quick Navigation</h3>
+          <h3 className="font-pixel text-xs text-gray-400 mb-4 uppercase tracking-widest">Quick Navigation</h3>
           <div className="flex flex-wrap gap-4 text-sm font-bold">
             <a href="#about" className="text-red-500 hover:text-white hover:underline underline decoration-red-500/50">About the Game</a>
             <a href="#mechanics" className="text-red-500 hover:text-white hover:underline underline decoration-red-500/50">Game Mechanics</a>
@@ -84,20 +109,30 @@ const ContentSection: React.FC = () => {
               Understanding the controls is the first step to dominance. The <strong>Karate Bros game</strong> features a dual-control scheme optimized for two players on a single keyboard, but it also supports gamepads for those playing the <strong>Karate Bros official</strong> desktop version.
             </p>
 
-            {/* YouTube Video - Lazy loaded */}
-            <div className="my-8 w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/Aknkeqa86BI?loading=lazy"
-                title="retrobowl26 org Karate Bros - RETRO FIGHTER IS BACK!"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                loading="lazy"
-                className="w-full h-full"
-              />
+            {/* YouTube Video - Lazy loaded with Intersection Observer */}
+            <div ref={videoRef} className="my-8 w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
+              {shouldLoadVideo ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/Aknkeqa86BI"
+                  title="retrobowl26 org Karate Bros - RETRO FIGHTER IS BACK!"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-black/50">
+                  <div className="text-center text-gray-400">
+                    <svg className="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <p className="text-sm">Video will load when scrolled into view</p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Image 2: karate-bros-game.png */}
@@ -119,14 +154,14 @@ const ContentSection: React.FC = () => {
                   PLAYER 1 CONTROLS
                 </h4>
                 <ul className="space-y-2 font-mono text-sm">
-                  <li className="flex justify-between"><span>W</span> <span className="text-gray-500">JUMP</span></li>
-                  <li className="flex justify-between"><span>A</span> <span className="text-gray-500">MOVE LEFT</span></li>
-                  <li className="flex justify-between"><span>D</span> <span className="text-gray-500">MOVE RIGHT</span></li>
-                  <li className="flex justify-between"><span>S</span> <span className="text-gray-500">BLOCK / CROUCH</span></li>
-                  <li className="flex justify-between"><span>SPACE</span> <span className="text-gray-500">QUICK ATTACK</span></li>
-                  <li className="flex justify-between"><span>F</span> <span className="text-gray-500">HEAVY PUNCH</span></li>
-                  <li className="flex justify-between"><span>G</span> <span className="text-gray-500">KICK</span></li>
-                  <li className="flex justify-between"><span>H</span> <span className="text-gray-500">SPECIAL</span></li>
+                  <li className="flex justify-between"><span>W</span> <span className="text-gray-400">JUMP</span></li>
+                  <li className="flex justify-between"><span>A</span> <span className="text-gray-400">MOVE LEFT</span></li>
+                  <li className="flex justify-between"><span>D</span> <span className="text-gray-400">MOVE RIGHT</span></li>
+                  <li className="flex justify-between"><span>S</span> <span className="text-gray-400">BLOCK / CROUCH</span></li>
+                  <li className="flex justify-between"><span>SPACE</span> <span className="text-gray-400">QUICK ATTACK</span></li>
+                  <li className="flex justify-between"><span>F</span> <span className="text-gray-400">HEAVY PUNCH</span></li>
+                  <li className="flex justify-between"><span>G</span> <span className="text-gray-400">KICK</span></li>
+                  <li className="flex justify-between"><span>H</span> <span className="text-gray-400">SPECIAL</span></li>
                 </ul>
               </div>
 
@@ -136,14 +171,14 @@ const ContentSection: React.FC = () => {
                   PLAYER 2 CONTROLS
                 </h4>
                 <ul className="space-y-2 font-mono text-sm">
-                  <li className="flex justify-between"><span>UP ARROW</span> <span className="text-gray-500">JUMP</span></li>
-                  <li className="flex justify-between"><span>LEFT ARROW</span> <span className="text-gray-500">MOVE LEFT</span></li>
-                  <li className="flex justify-between"><span>RIGHT ARROW</span> <span className="text-gray-500">MOVE RIGHT</span></li>
-                  <li className="flex justify-between"><span>DOWN ARROW</span> <span className="text-gray-500">BLOCK / CROUCH</span></li>
-                  <li className="flex justify-between"><span>NUM 0</span> <span className="text-gray-500">QUICK ATTACK</span></li>
-                  <li className="flex justify-between"><span>K</span> <span className="text-gray-500">HEAVY PUNCH</span></li>
-                  <li className="flex justify-between"><span>L</span> <span className="text-gray-500">KICK</span></li>
-                  <li className="flex justify-between"><span>J</span> <span className="text-gray-500">SPECIAL</span></li>
+                  <li className="flex justify-between"><span>UP ARROW</span> <span className="text-gray-400">JUMP</span></li>
+                  <li className="flex justify-between"><span>LEFT ARROW</span> <span className="text-gray-400">MOVE LEFT</span></li>
+                  <li className="flex justify-between"><span>RIGHT ARROW</span> <span className="text-gray-400">MOVE RIGHT</span></li>
+                  <li className="flex justify-between"><span>DOWN ARROW</span> <span className="text-gray-400">BLOCK / CROUCH</span></li>
+                  <li className="flex justify-between"><span>NUM 0</span> <span className="text-gray-400">QUICK ATTACK</span></li>
+                  <li className="flex justify-between"><span>K</span> <span className="text-gray-400">HEAVY PUNCH</span></li>
+                  <li className="flex justify-between"><span>L</span> <span className="text-gray-400">KICK</span></li>
+                  <li className="flex justify-between"><span>J</span> <span className="text-gray-400">SPECIAL</span></li>
                 </ul>
               </div>
             </div>

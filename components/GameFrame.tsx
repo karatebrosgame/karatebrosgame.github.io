@@ -11,11 +11,11 @@ const GameFrame: React.FC = () => {
 
   // 5张游戏图片
   const gameImages = [
-    '/karate-bros-free.png',
-    '/karate-bros-game.png',
-    '/karate-bros-github.png',
-    '/karate-bros-io.png',
-    '/karate-bros-online.png',
+    '/karate-bros-free.webp',
+    '/karate-bros-game.webp',
+    '/karate-bros-github.webp',
+    '/karate-bros-io.webp',
+    '/karate-bros-online.webp',
   ];
 
   // 自动轮播图片
@@ -54,7 +54,7 @@ const GameFrame: React.FC = () => {
             <h1 className="text-3xl md:text-5xl font-pixel text-white mb-2 tracking-widest">
               <span className="text-red-600">KARATE BROS</span>
             </h1>
-            <p className="font-mono text-gray-500 text-xs md:text-sm tracking-[0.2em] uppercase">
+                <p className="font-mono text-gray-400 text-xs md:text-sm tracking-[0.2em] uppercase">
               Official Online Game • Unblocked 2026
             </p>
           </div>
@@ -78,7 +78,7 @@ const GameFrame: React.FC = () => {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1280px"
                   />
                   
-                  {/* 图片指示器 */}
+                  {/* 图片指示器 - 增加触摸目标大小 */}
                   <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
                     {gameImages.map((_, index) => (
                       <button
@@ -87,13 +87,19 @@ const GameFrame: React.FC = () => {
                           e.stopPropagation();
                           setCurrentImageIndex(index);
                         }}
-                        className={`w-2 h-2 rounded-full transition-all ${
+                        className={`min-w-[44px] min-h-[44px] rounded-full transition-all flex items-center justify-center ${
                           index === currentImageIndex
-                            ? 'bg-red-600 w-8'
-                            : 'bg-white/50 hover:bg-white/75'
+                            ? 'bg-red-600 w-12'
+                            : 'bg-white/50 hover:bg-white/75 w-3 h-3'
                         }`}
                         aria-label={`Go to image ${index + 1}`}
-                      />
+                      >
+                        <span className={`rounded-full ${
+                          index === currentImageIndex
+                            ? 'w-3 h-3 bg-white'
+                            : 'w-2 h-2 bg-white'
+                        }`}></span>
+                      </button>
                     ))}
                   </div>
 
@@ -154,7 +160,7 @@ const GameFrame: React.FC = () => {
             <span>Server: US-East-1</span>
             <span>Version: v2.4.0</span>
             <span className="flex items-center gap-1">
-              <span className="inline-block w-2 h-2 rounded-full bg-green-600 animate-pulse" aria-label="Online"></span>
+              <span className="inline-block w-2 h-2 rounded-full bg-green-600 animate-pulse" role="status" aria-live="polite"></span>
               <span className="text-green-600">Status: ONLINE</span>
             </span>
           </div>
