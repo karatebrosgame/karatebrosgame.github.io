@@ -4,7 +4,6 @@ A Next.js-based SEO-friendly website for playing Karate Bros online.
 
 ## Features
 
-- ✅ SEO optimized with Next.js App Router
 - ✅ Server-side rendering for better search engine indexing
 - ✅ Automatic sitemap and robots.txt generation
 - ✅ Open Graph and Twitter Card metadata
@@ -63,8 +62,7 @@ npm start
 │   ├── GameFrame.tsx
 │   ├── ContentSection.tsx
 │   └── Footer.tsx
-└── script/           # SEO audit scripts (unchanged)
-```
+
 
 ## Deployment
 
