@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Karate Bros - Play Official Karate Bros Game Online | Unblocked',
+  title: 'Karate Bros - Play Karate Bros IO Game Online Free | Unblocked',
   description: 'Play Karate Bros online! The official Karate Bros game unblocked. Master the controls, learn strategies, and join the Karate Bros io arena. Fun for everyone.',
   keywords: ['karate bros', 'karate bros game', 'karate bros online', 'karate bros io', 'karate bros unblocked', 'karate bros crazy games', 'karate bros official', 'karate bros girl'],
   authors: [{ name: 'Karate Bros' }],
@@ -40,10 +40,7 @@ export const metadata: Metadata = {
     images: ['/og-image.svg'],
   },
   icons: {
-    icon: [
-      { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
+    icon: '/favicon.png',
     shortcut: '/favicon.png',
     apple: '/favicon.png',
   },
