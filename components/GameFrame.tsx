@@ -1,17 +1,9 @@
 'use client'
 
-import React, { useState, useRef } from 'react';
-import Image from 'next/image';
+import React, { useRef } from 'react';
 
 const GameFrame: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  const handlePlayClick = () => {
-    setIsLoading(true);
-    setIsPlaying(true);
-  };
 
   const handleFullscreen = () => {
     if (iframeRef.current) {
@@ -19,10 +11,6 @@ const GameFrame: React.FC = () => {
         iframeRef.current.requestFullscreen();
       }
     }
-  };
-
-  const handleIframeLoad = () => {
-    setIsLoading(false);
   };
 
   return (
@@ -40,72 +28,24 @@ const GameFrame: React.FC = () => {
           </div>
           
           {/* Game Container - Sharp edges, simple border */}
-          <div className="relative w-full max-w-5xl aspect-video bg-black border-4 border-white/10 cursor-pointer group">
-            {!isPlaying ? (
-              <>
-                {/* 游戏预览图 - 点击加载 */}
-                <div 
-                  onClick={handlePlayClick}
-                  className="relative w-full h-full bg-black overflow-hidden"
-                >
-                  <Image
-                    src="/game-preview.svg"
-                    alt="Karate Bros Game - Click to Play"
-                    fill
-                    className="object-cover transition-opacity group-hover:opacity-90"
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1280px"
-                  />
-                  {/* 点击提示覆盖层 */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors">
-                    <div className="text-center">
-                      <div className="mb-4">
-                        <svg className="w-16 h-16 mx-auto text-white animate-pulse" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z"/>
-                        </svg>
-                      </div>
-                      <p className="font-pixel text-white text-lg md:text-2xl tracking-widest">
-                        CLICK TO PLAY
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                {/* 加载状态 */}
-                {isLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black z-20">
-                    <div className="text-center">
-                      <div className="mb-4">
-                        <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
-                      </div>
-                      <p className="font-pixel text-white text-sm tracking-widest">
-                        LOADING GAME...
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {/* 游戏 iframe - 懒加载 */}
-                <iframe
-                  ref={iframeRef}
-                  src="https://karatebros.io"
-                  title="Karate Bros Online Game"
-                  className="w-full h-full"
-                  allow="autoplay; fullscreen; gamepad; accelerometer; focus-without-user-activation *"
-                  style={{ border: 'none' }}
-                  loading="lazy"
-                  onLoad={handleIframeLoad}
-                />
-                <button
-                  onClick={handleFullscreen}
-                  className="absolute bottom-4 right-4 bg-black/50 hover:bg-red-600 text-white px-3 py-1 font-pixel text-[10px] border border-white/20 z-10 transition-colors"
-                  aria-label="Fullscreen"
-                >
-                  FULLSCREEN
-                </button>
-              </>
-            )}
+          <div className="relative w-full max-w-5xl aspect-video bg-black border-4 border-white/10">
+            {/* 直接加载游戏 iframe */}
+            <iframe
+              ref={iframeRef}
+              src="https://karatebros.io"
+              title="Karate Bros Online Game"
+              className="w-full h-full"
+              allow="autoplay; fullscreen; gamepad; accelerometer; focus-without-user-activation *"
+              style={{ border: 'none' }}
+              loading="lazy"
+            />
+            <button
+              onClick={handleFullscreen}
+              className="absolute bottom-4 right-4 bg-black/50 hover:bg-red-600 text-white px-3 py-1 font-pixel text-[10px] border border-white/20 z-10 transition-colors"
+              aria-label="Fullscreen"
+            >
+              FULLSCREEN
+            </button>
           </div>
           
           {/* Status Bar */}
