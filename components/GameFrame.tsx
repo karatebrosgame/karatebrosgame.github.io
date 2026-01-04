@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useRef } from 'react';
-import Image from 'next/image';
 
 const GameFrame: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -43,21 +42,25 @@ const GameFrame: React.FC = () => {
           <div className="relative w-full max-w-5xl aspect-video bg-black border-4 border-white/10 cursor-pointer group">
             {!isPlaying ? (
               <>
-                {/* 使用 og-image.svg 作为预览图 - 点击加载 */}
+                {/* 使用 YouTube 视频作为预览 - 点击加载游戏 */}
                 <div 
                   onClick={handlePlayClick}
-                  className="relative w-full h-full bg-black overflow-hidden"
+                  className="relative w-full h-full bg-black overflow-hidden cursor-pointer"
                 >
-                  <Image
-                    src="/og-image.svg"
-                    alt="Karate Bros Game - Click to Play"
-                    fill
-                    className="object-contain transition-opacity group-hover:opacity-90"
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1280px"
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/Aknkeqa86BI"
+                    title="retrobowl26 org Karate Bros - RETRO FIGHTER IS BACK!"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    className="pointer-events-none"
+                    loading="lazy"
                   />
                   {/* 点击提示覆盖层 */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors cursor-pointer">
                     <div className="text-center">
                       <div className="mb-4">
                         <svg className="w-16 h-16 mx-auto text-white animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -65,7 +68,7 @@ const GameFrame: React.FC = () => {
                         </svg>
                       </div>
                       <p className="font-pixel text-white text-lg md:text-2xl tracking-widest">
-                        CLICK TO PLAY
+                        CLICK TO PLAY GAME
                       </p>
                     </div>
                   </div>
