@@ -86,8 +86,6 @@ const ContentSection: React.FC = () => {
             {/* YouTube Video */}
             <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
               <iframe
-                width="100%"
-                height="100%"
                 src="https://www.youtube.com/embed/Aknkeqa86BI"
                 title="retrobowl26 org Karate Bros - RETRO FIGHTER IS BACK!"
                 frameBorder="0"
@@ -95,7 +93,7 @@ const ContentSection: React.FC = () => {
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
                 loading="lazy"
-                className="w-full h-full"
+                className="absolute inset-0 w-full h-full"
               />
             </div>
 
