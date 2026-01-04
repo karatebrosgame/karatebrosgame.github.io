@@ -1,0 +1,41 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background - Dojo style -->
+  <rect width="1280" height="720" fill="#8B4513"/>
+  
+  <!-- Wooden floor pattern -->
+  <defs>
+    <pattern id="wood" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#A0522D"/>
+      <line x1="0" y1="20" x2="40" y2="20" stroke="#8B4513" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="720" fill="url(#wood)"/>
+  
+  <!-- Title -->
+  <text x="640" y="120" font-family="'Press Start 2P', monospace" font-size="64" fill="#DC2626" text-anchor="middle" font-weight="bold" stroke="#000" stroke-width="2">
+    KARATE
+  </text>
+  
+  <!-- Play Button -->
+  <rect x="440" y="280" width="400" height="80" fill="#2563EB" stroke="#FF8C00" stroke-width="4" rx="8"/>
+  <text x="640" y="330" font-family="'Press Start 2P', monospace" font-size="32" fill="#FFFFFF" text-anchor="middle">
+    PLAY NOW!
+  </text>
+  
+  <!-- Game Mode Buttons -->
+  <rect x="340" y="400" width="280" height="60" fill="#EAB308" stroke="#000" stroke-width="2" rx="4"/>
+  <text x="480" y="435" font-family="'Press Start 2P', monospace" font-size="16" fill="#000" text-anchor="middle">
+    2 PLAYERS
+  </text>
+  
+  <rect x="660" y="400" width="280" height="60" fill="#FF8C00" stroke="#000" stroke-width="2" rx="4"/>
+  <text x="800" y="435" font-family="'Press Start 2P', monospace" font-size="16" fill="#000" text-anchor="middle">
+    TOURNAMENT
+  </text>
+  
+  <!-- Click to play hint -->
+  <text x="640" y="550" font-family="'Press Start 2P', monospace" font-size="20" fill="#FFFFFF" text-anchor="middle" opacity="0.8">
+    CLICK TO PLAY
+  </text>
+</svg>
+
