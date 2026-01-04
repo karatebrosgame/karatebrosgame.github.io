@@ -3,9 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   // Enable static export for GitHub Pages
   output: 'export',
-  // Base path for GitHub Pages (empty if using karatebros.github.io)
-  // If your repo is named differently, set basePath: '/repo-name'
-  basePath: '',
+  // Base path for GitHub Pages
+  // Since repo name is 'karatebros', the URL will be karatebrosgame.github.io/karatebros
+  basePath: '/karatebros',
   // Trailing slash for GitHub Pages compatibility
   trailingSlash: true,
   images: {
