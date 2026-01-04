@@ -61,6 +61,7 @@ const ContentSection: React.FC = () => {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 800px"
+                loading="lazy"
               />
             </div>
 
@@ -83,17 +84,19 @@ const ContentSection: React.FC = () => {
               Understanding the controls is the first step to dominance. The <strong>Karate Bros game</strong> features a dual-control scheme optimized for two players on a single keyboard, but it also supports gamepads for those playing the <strong>Karate Bros official</strong> desktop version.
             </p>
 
-            {/* YouTube Video */}
-            <div className="my-8 relative w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
+            {/* YouTube Video - Lazy loaded */}
+            <div className="my-8 w-full aspect-video bg-black border-2 border-white/10 overflow-hidden rounded">
               <iframe
-                src="https://www.youtube.com/embed/Aknkeqa86BI"
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/Aknkeqa86BI?loading=lazy"
                 title="retrobowl26 org Karate Bros - RETRO FIGHTER IS BACK!"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
                 loading="lazy"
-                className="absolute inset-0 w-full h-full"
+                className="w-full h-full"
               />
             </div>
 
@@ -105,6 +108,7 @@ const ContentSection: React.FC = () => {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 800px"
+                loading="lazy"
               />
             </div>
 
@@ -173,6 +177,7 @@ const ContentSection: React.FC = () => {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 800px"
+                loading="lazy"
               />
             </div>
 
@@ -219,6 +224,7 @@ const ContentSection: React.FC = () => {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 800px"
+                loading="lazy"
               />
             </div>
             
@@ -256,6 +262,7 @@ const ContentSection: React.FC = () => {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 800px"
+                loading="lazy"
               />
             </div>
 

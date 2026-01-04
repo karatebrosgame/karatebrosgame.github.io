@@ -69,6 +69,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Preconnect to external domains for faster loading */}
+        <link rel="preconnect" href="https://www.youtube.com" />
+        <link rel="preconnect" href="https://www.youtube.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://karatebros.io" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
+        <link rel="dns-prefetch" href="https://karatebros.io" />
+      </head>
       <body className="min-h-screen flex flex-col bg-black text-slate-50 font-sans selection:bg-red-500 selection:text-white">
         {children}
       </body>
