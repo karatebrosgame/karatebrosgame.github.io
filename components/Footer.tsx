@@ -1,6 +1,12 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
+  const startYear = 2024; // Project start year
+  const currentYear = new Date().getFullYear();
+  const copyrightYear = currentYear > startYear 
+    ? `${startYear}-${currentYear}` 
+    : startYear.toString();
+
   return (
     <footer className="bg-black border-t border-white/10 text-gray-400 py-12 font-sans">
       <div className="container mx-auto px-4">
@@ -34,7 +40,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-white/5 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-xs">
-          <p>&copy; 2026 Karate Bros Fan Portal. All rights reserved.</p>
+          <p>&copy; {copyrightYear} Karate Bros Fan Portal. All rights reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0 font-mono">
             <span>KARATE BROS OFFICIAL</span>
             <span>UNBLOCKED GAMES</span>

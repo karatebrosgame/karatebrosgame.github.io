@@ -8,6 +8,7 @@ const GameFrame: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const currentYear = new Date().getFullYear();
 
   // 5张游戏图片
   const gameImages = [
@@ -55,7 +56,7 @@ const GameFrame: React.FC = () => {
               <span className="text-red-600">KARATE BROS</span>
             </h1>
                 <p className="font-mono text-gray-400 text-xs md:text-sm tracking-[0.2em] uppercase">
-              Official Online Game • Unblocked 2026
+              Official Online Game • Unblocked {currentYear}
             </p>
           </div>
           

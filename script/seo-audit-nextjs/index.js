@@ -20,7 +20,8 @@ class NextJSSEOAuditor {
             favicon: { status: 'pass', issues: [] },
             images: { status: 'pass', issues: [] },
             videos: { status: 'pass', issues: [] },
-            fonts: { status: 'pass', issues: [] }
+            fonts: { status: 'pass', issues: [] },
+            hardcodedDates: { status: 'pass', issues: [] }
         };
     }
 
@@ -38,6 +39,7 @@ class NextJSSEOAuditor {
         await this.checkImages();
         await this.checkVideos();
         await this.checkFonts();
+        await this.checkHardcodedDates();
 
         this.generateReport();
     }
@@ -344,6 +346,74 @@ class NextJSSEOAuditor {
         }
     }
 
+    async checkHardcodedDates() {
+        console.log('\n📅 Checking for Hardcoded Dates...');
+        const appFiles = await this.globFiles('app/**/*.{ts,tsx,js,jsx}');
+        const componentFiles = await this.globFiles('components/**/*.{ts,tsx,js,jsx}');
+        const allFiles = [...appFiles, ...componentFiles].map(f => path.join(this.basePath, f));
+        
+        const currentYear = new Date().getFullYear();
+        const nextYear = currentYear + 1;
+        const yearPatterns = [
+            new RegExp(`\\b20[2-9][0-9]\\b`, 'g'), // Years 2020-2099
+        ];
+        
+        // Patterns to exclude (dynamic date generation)
+        const excludePatterns = [
+            /new Date\(\)/,
+            /getFullYear\(\)/,
+            /getYear\(\)/,
+            /currentYear/,
+            /copyrightYear/,
+            /startYear/,
+            /\/\/.*/,  // Comments
+            /\/\*[\s\S]*?\*\//,  // Block comments
+            /@type/,  // TypeScript type annotations
+            /@param/,  // JSDoc comments
+        ];
+
+        for (const file of allFiles) {
+            const content = await fs.readFile(file, 'utf-8');
+            const lines = content.split('\n');
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                
+                // Skip excluded patterns
+                if (excludePatterns.some(pattern => pattern.test(line))) {
+                    continue;
+                }
+                
+                // Check for hardcoded years
+                for (const pattern of yearPatterns) {
+                    const matches = line.match(pattern);
+                    if (matches) {
+                        for (const match of matches) {
+                            const year = parseInt(match, 10);
+                            // Only flag future years or years that should be dynamic
+                            if (year >= currentYear && year <= nextYear + 5) {
+                                // Check if it's in a string that looks like it should be dynamic
+                                if (/unblocked|copyright|©|&copy;|reserved/i.test(line) && 
+                                    !/currentYear|copyrightYear|getFullYear/i.test(line)) {
+                                    this.results.hardcodedDates.status = 'warning';
+                                    const relativePath = path.relative(this.basePath, file);
+                                    this.results.hardcodedDates.issues.push(
+                                        `${relativePath}:${i + 1} - Hardcoded year "${match}" found. Consider using dynamic date (new Date().getFullYear())`
+                                    );
+                                    console.log(`  ⚠️  Hardcoded year "${match}" in ${relativePath}:${i + 1}`);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (this.results.hardcodedDates.issues.length === 0) {
+            console.log('  ✅ No hardcoded dates found (using dynamic dates)');
+        }
+    }
+
     generateReport() {
         console.log('\n' + '='.repeat(60));
         console.log('📊 SEO Audit Summary\n');
@@ -359,7 +429,8 @@ class NextJSSEOAuditor {
             { name: 'Favicon', result: this.results.favicon },
             { name: 'Image Optimization', result: this.results.images },
             { name: 'Video Optimization', result: this.results.videos },
-            { name: 'Font Localization', result: this.results.fonts }
+            { name: 'Font Localization', result: this.results.fonts },
+            { name: 'Hardcoded Dates', result: this.results.hardcodedDates }
         ];
 
         let passCount = 0;
