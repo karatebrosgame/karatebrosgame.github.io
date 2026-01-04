@@ -1,11 +1,32 @@
 'use client'
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 
 const GameFrame: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // 5张游戏图片
+  const gameImages = [
+    '/karate-bros-free.png',
+    '/karate-bros-game.png',
+    '/karate-bros-github.png',
+    '/karate-bros-io.png',
+    '/karate-bros-online.png',
+  ];
+
+  // 自动轮播图片
+  useEffect(() => {
+    if (!isPlaying) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % gameImages.length);
+      }, 3000); // 每3秒切换一张
+      return () => clearInterval(interval);
+    }
+  }, [isPlaying, gameImages.length]);
 
   const handlePlayClick = () => {
     setIsLoading(true);
@@ -42,25 +63,42 @@ const GameFrame: React.FC = () => {
           <div className="relative w-full max-w-5xl aspect-video bg-black border-4 border-white/10 cursor-pointer group">
             {!isPlaying ? (
               <>
-                {/* 使用 YouTube 视频作为预览 - 点击加载游戏 */}
+                {/* 图片轮播预览 - 点击加载游戏 */}
                 <div 
                   onClick={handlePlayClick}
                   className="relative w-full h-full bg-black overflow-hidden cursor-pointer"
                 >
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/Aknkeqa86BI"
-                    title="retrobowl26 org Karate Bros - RETRO FIGHTER IS BACK!"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    className="pointer-events-none"
-                    loading="lazy"
+                  {/* 当前显示的图片 */}
+                  <Image
+                    src={gameImages[currentImageIndex]}
+                    alt={`Karate Bros Game Screenshot ${currentImageIndex + 1}`}
+                    fill
+                    className="object-cover transition-opacity duration-500"
+                    priority={currentImageIndex === 0}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1280px"
                   />
+                  
+                  {/* 图片指示器 */}
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+                    {gameImages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentImageIndex(index);
+                        }}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          index === currentImageIndex
+                            ? 'bg-red-600 w-8'
+                            : 'bg-white/50 hover:bg-white/75'
+                        }`}
+                        aria-label={`Go to image ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+
                   {/* 点击提示覆盖层 */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors cursor-pointer">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors cursor-pointer">
                     <div className="text-center">
                       <div className="mb-4">
                         <svg className="w-16 h-16 mx-auto text-white animate-pulse" fill="currentColor" viewBox="0 0 24 24">

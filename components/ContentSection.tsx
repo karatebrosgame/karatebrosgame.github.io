@@ -1,6 +1,15 @@
 import React from 'react';
+import Image from 'next/image';
 
 const ContentSection: React.FC = () => {
+  const gameImages = [
+    { src: '/karate-bros-free.png', alt: 'Karate Bros Free Game' },
+    { src: '/karate-bros-game.png', alt: 'Karate Bros Game' },
+    { src: '/karate-bros-github.png', alt: 'Karate Bros GitHub' },
+    { src: '/karate-bros-io.png', alt: 'Karate Bros IO' },
+    { src: '/karate-bros-online.png', alt: 'Karate Bros Online' },
+  ];
+
   return (
     <div className="bg-black text-gray-300 pb-24 font-sans leading-relaxed">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -23,6 +32,21 @@ const ContentSection: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-display text-white mb-8 tracking-wide">
             The Comprehensive Guide to <span className="text-red-600">Karate Bros</span>
           </h1>
+
+          {/* Game Images Gallery */}
+          <div className="mb-12 grid grid-cols-2 md:grid-cols-3 gap-4">
+            {gameImages.map((image, index) => (
+              <div key={index} className="relative aspect-video bg-black border-2 border-white/10 overflow-hidden group">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="object-cover transition-transform group-hover:scale-110"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 300px"
+                />
+              </div>
+            ))}
+          </div>
 
           {/* Intro Block */}
           <div className="mb-12 text-lg text-gray-200">
