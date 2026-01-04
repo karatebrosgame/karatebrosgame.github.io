@@ -4,8 +4,8 @@ const nextConfig = {
   // Enable static export for GitHub Pages
   output: 'export',
   // Base path for GitHub Pages
-  // Since repo name is 'karatebros', the URL will be karatebrosgame.github.io/karatebros
-  basePath: '/karatebros',
+  // Empty for root domain deployment (karatebrosgame.github.io)
+  basePath: '',
   // Trailing slash for GitHub Pages compatibility
   trailingSlash: true,
   images: {

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://karatebrosgame.github.io/karatebros'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://karatebrosgame.github.io'),
   alternates: {
     canonical: '/',
   },
